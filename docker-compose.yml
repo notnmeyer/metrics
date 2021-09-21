@@ -12,6 +12,16 @@ services:
     networks:
       - common
 
+  awair_exporter:
+    container_name: awair_exporter
+    image: awair_exporter
+    build: https://github.com/claytono/awair_exporter.git
+    ports:
+      - 8000:8000
+    networks:
+      - common
+    env_file: .env
+
   prometheus:
     image: prom/prometheus
     ports:
