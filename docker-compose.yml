@@ -1,0 +1,43 @@
+version: "3"
+
+services:
+  bobcat_exporter:
+    container_name: bobcat_exporter
+    image: ghcr.io/pperzyna/bobcat_exporter
+    environment:
+      BOBCAT_EXPORTER_MINER_URI: http://192.168.86.58
+      BOBCAT_EXPORTER_WEB_LISTEN_ADDRESS: :9857
+    ports:
+      - 9857:9857
+    networks:
+      - common
+
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - 9090:9090
+    networks:
+      - common
+    volumes:
+        - type: bind
+          source: etc/prometheus/prometheus.yml
+          target: /etc/prometheus/prometheus.yml
+
+  grafana:
+    container_name: grafana
+    image: grafana/grafana:latest
+    ports:
+      - 3000:3000
+    volumes:
+      - grafana-storage:/var/lib/grafana
+    networks:
+      - common
+
+networks:
+  common:
+    name: common
+    external: true
+
+volumes:
+  grafana-storage:
+    external: true
