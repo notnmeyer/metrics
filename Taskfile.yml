@@ -9,7 +9,7 @@ tasks:
     deps:
       - init
     cmds:
-      - docker compose up --remove-orphans
+      - docker compose up --remove-orphans -d
 
   down:
     - docker compose down
