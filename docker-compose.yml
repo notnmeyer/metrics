@@ -5,7 +5,7 @@ services:
     container_name: bobcat_exporter
     image: ghcr.io/pperzyna/bobcat_exporter
     environment:
-      BOBCAT_EXPORTER_MINER_URI: http://192.168.86.58
+      BOBCAT_EXPORTER_MINER_URI: http://bobcatminer
       BOBCAT_EXPORTER_WEB_LISTEN_ADDRESS: :9857
     ports:
       - 9857:9857
